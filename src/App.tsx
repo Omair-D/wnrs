@@ -4,7 +4,6 @@ import React from "react";
 import { levelOne, levelThree, levelTwo } from "./assets/levels";
 import Card from "./components/card/Card";
 import { bigCardStyles } from "./components/card/Card.css";
-import Credits from "./components/credits/Credits";
 import CardHistory from "./components/history/CardHistory";
 import {
   appStyles,
@@ -16,31 +15,12 @@ import {
   titleStyles,
 } from "./styles/app.css";
 
-function shuffle<T>(array: T[]) {
-  let currentIndex = array.length;
-  let temporaryValue;
-  let randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
-
 function App() {
+  // Use questions in the exact order they are defined in levels.ts
   const levels = {
-    levelOne: shuffle(levelOne),
-    levelTwo: shuffle(levelTwo),
-    levelThree: shuffle(levelThree),
+    levelOne,
+    levelTwo,
+    levelThree,
   };
 
   const [gameState] = React.useState(levels);
@@ -90,10 +70,9 @@ function App() {
 
   return (
     <div className={appStyles}>
-      <Credits />
       <div className={levelsStyles}>{buttons}</div>
       <div className={questionStyles}>
-        <div className={titleStyles}>wnrs</div>
+        <div className={titleStyles}>❤️wnrs❤️</div>
         <Card styleName={bigCardStyles} question={currCard} />
         <button className={nextCardButtonStlyes} onClick={() => handleNextCard()}>
           next card
